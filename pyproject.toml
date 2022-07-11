@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "joplan"
+version = "0.0.1"
+description = "Python Simple Job Scheduling."
+readme = "README.md"
+homepage = "https://github.com/wonderbeyond/joplan"
+repository = "https://github.com/wonderbeyond/joplan"
+documentation = "https://github.com/wonderbeyond/joplan"
+keywords = ["python", "scheduler", "cronjob", "crontab"]
+authors = ["Wonder <wonderbeyond@gmail.com>"]
+license = "MIT"
+classifiers = [
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pytest = {version = "^7.1.2", optional = true}
+tox = {version = "^3.25.0", optional = true}
+deltaman = "^0.0.4"
+
+[tool.poetry.dev-dependencies]
+ipdb = "^0.13.9"
+ipython = "^8.4.0"
+flake8 = "^4.0.1"
+mypy = "^0.961"
+
+[tool.poetry.extras]
+testing = ["pytest", "tox"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
