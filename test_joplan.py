@@ -1,7 +1,7 @@
 import datetime as dt
 from unittest import mock
 
-from joplan import do, every, Job, Plan
+from joplan import do, every, take, Job, Plan
 
 
 def mock_job_func(name=None):
@@ -37,7 +37,7 @@ class mock_datetime(object):
         dt.datetime = self.original_datetime
 
 
-def test_job_constructor():
+def test_job_construction():
     job_func = mock_job_func()
 
     for job in (
@@ -49,16 +49,29 @@ def test_job_constructor():
         assert job.func is job_func
 
 
+def test_plan_construction():
+    job_func = mock_job_func()
+    plan1 = take(
+        every('30s').do(job_func),
+        every('1min').do(job_func),
+    )
+    plan2 = Plan([
+        every('30s').do(job_func),
+        every('1min').do(job_func),
+    ])
+    assert isinstance(plan1, Plan)
+    assert isinstance(plan2, Plan)
+    assert plan1 == plan2
+
+
 def test_plan():
     job_func1 = mock_job_func(name='job_func1')
     job_func2 = mock_job_func(name='job_func2')
 
-    plan = Plan([
+    plan = take(
         every('30s').do(job_func1),
         every('1min').do(job_func2),
-    ])
-    assert isinstance(plan, Plan)
-
+    )
     initial_time = dt.datetime(3000, 1, 1, 1, 0, 0)
 
     with mock_datetime(initial_time):

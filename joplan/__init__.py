@@ -92,6 +92,15 @@ class Plan:
     def __repr__(self):
         return repr(self._jobs)
 
+    def __eq__(self, __o: object) -> bool:
+        if not isinstance(__o, Plan):
+            raise TypeError(f'Cannot compare {type(self)} with {type(__o)}.')
+        return self._jobs == __o._jobs
+
+
+def take(*jobs: Job):
+    return Plan(jobs)
+
 
 if __name__ == '__main__':
     def f1():
@@ -100,7 +109,7 @@ if __name__ == '__main__':
     def f2():
         print('Making F2')
 
-    Plan([
+    take(
         every('2s').do(f1),
-        do(f2).every('3s')
-    ]).run()
+        do(f2).every('3s'),
+    ).run()

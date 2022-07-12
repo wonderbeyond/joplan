@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "joplan"
-version = "0.0.1"
+version = "0.1.0"
 description = "Python Simple Job Scheduling."
 readme = "README.md"
 homepage = "https://github.com/wonderbeyond/joplan"
